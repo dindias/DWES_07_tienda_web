@@ -3,6 +3,7 @@ require_once '../libs/xajax_core/xajax.inc.php';
 spl_autoload_register(function ($clase) {
     include '../clases/' . $clase . '.php';
 });
+session_start();
 
 // Crear una instancia de xajax
 $xajax = new xajax();
@@ -17,7 +18,6 @@ $xajax->configure('javascript URI','../clases/');
 // Debe ser llamado antes del código HTML
 $xajax->processRequest();
 
-session_start();
 
 function cargarCesta($codigo){ 
   $respuesta = new xajaxResponse();
@@ -46,6 +46,7 @@ function cargarCesta($codigo){
 function vaciarCesta() {
 
     $respuesta = new xajaxResponse();
+    unset($_SESSION['cesta']);
     $cesta = new CestaCompra();
     //$_SESSION["cesta"]=$cesta;
     //$_SESSION["cesta"]->vaciadoCesta();
